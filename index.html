@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  
+  <title>Frontend Mentor | Newsletter sign-up form with success message</title>
+
+</head>
+<body>
+
+  <main>
+    <div class="subscribe-form card">
+      <div class="subscribe-form-left">
+        <h1>Stay updated!</h1>
+        <p>Join 60,000+ product managers receiving monthly updates on:</p>
+
+        <ul>
+          <li>Product discovery and building what matters</li>
+          <li>Measuring to ensure updates are a success</li>
+          <li>And much more!</li>
+        </ul>
+
+        <div class="input-group">
+          <div class="label-container">
+            <label for="email-address">Email address</label>
+            <label class="error hidden" for="email-address">Valid email required</label>
+          </div>
+          <input name="email-address" type="email" placeholder="email@company.com">
+          <a class="btn" href="#" onclick="subscribe(); return false;">Subscribe to monthly newsletter</a>
+        </div>
+        
+      </div>
+
+      <div class="subscribe-form-right">
+        <picture>
+          <source media="(max-width: 600px)" srcset="assets/images/illustration-sign-up-mobile.svg">
+          <source media="(min-width: 601px)" srcset="assets/images/illustration-sign-up-desktop.svg">
+          <img src="assets/images/illustration-sign-up-desktop.svg" alt="Important-looking graphs and numbers">
+        </picture>
+      </div>
+    </div>
+
+    <div class="subscribe-success-message card hidden">
+      <div class="subscribe-success-top-half">
+        <img src="assets/images/icon-success.svg" alt="Success">
+        <h1>Thanks for subscribing!</h1>
+        <p>A confirmation email has been sent to <span id="subscribed-email-address">ash@loremcompany.com</span>.
+          Please open it and click the button inside to confirm your subscription.</p>
+      </div>
+      <a href="#" class="btn" onclick="dismissMessage(); return false;">Dismiss message</a>
+    </div>
+  </main>
+  
+  <script>
+    function subscribe() {
+      const emailAddressInput = document.getElementsByName("email-address")[0];
+      const errorMessage = document.querySelector("label[for='email-address'].error");
+      const emailAddress = emailAddressInput.value;
+      if (!validateEmail(emailAddress)) {
+        emailAddressInput.classList.add("error");
+        errorMessage.classList.remove("hidden");
+      } else {
+        emailAddressInput.classList.remove("error");
+        errorMessage.classList.add("hidden");
+        document.getElementById("subscribed-email-address").innerHTML = emailAddress;
+        document.getElementsByClassName("subscribe-form")[0].classList.add("hidden");
+        document.getElementsByClassName("subscribe-success-message")[0].classList.remove("hidden");
+      }
+    }
+
+    // Regex from https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
+    // Just check that it matches the pattern "[a]@[b].[c]" where sections a/b/c do not contain whitespace
+    // Not 100% correct but close enough for a pretend site
+    const validateEmail = (email) => {
+      return String(email)
+        .match(
+          /^\S+@\S+\.\S+$/
+        );
+    };
+
+    function dismissMessage() {
+      document.getElementsByClassName("subscribe-form")[0].classList.remove("hidden");
+      document.getElementsByClassName("subscribe-success-message")[0].classList.add("hidden");
+    }
+  </script>
+</body>
+</html>
