@@ -32,7 +32,7 @@
             <label for="email-address">Email address</label>
             <label class="error hidden" for="email-address">Valid email required</label>
           </div>
-          <input name="email-address" type="email" placeholder="email@company.com">
+          <input id="email-address" type="email" placeholder="email@company.com">
           <a class="btn" href="#" onclick="subscribe(); return false;">Subscribe to monthly newsletter</a>
         </div>
         
@@ -60,7 +60,7 @@
   
   <script>
     function subscribe() {
-      const emailAddressInput = document.getElementsByName("email-address")[0];
+      const emailAddressInput = document.getElementById("email-address");
       const errorMessage = document.querySelector("label[for='email-address'].error");
       const emailAddress = emailAddressInput.value;
       if (!validateEmail(emailAddress)) {
