@@ -185,6 +185,8 @@ span#subscribed-email-address {
     .subscribe-form {
         display: flex;
         flex-direction: column-reverse;
+        justify-content: space-between;
+        min-height: 100vh;
     }
 
     .subscribe-form-right {
